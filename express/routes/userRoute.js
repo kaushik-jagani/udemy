@@ -1,40 +1,6 @@
 const express =require('express')
 
-//handlers
-const getAllUsers =(req,res)=>{
-    res.status(500).json({
-        status:'Error',
-        message : 'this function not defined yet!!'
-    });
-};
-
-const getUsers =(req,res)=>{
-    res.status(500).json({
-        status:'Error',
-        message : 'this function not defined yet!!'
-    });
-};
-
-const createUsers =(req,res)=>{
-    res.status(500).json({
-        status:'Error',
-        message : 'this function not defined yet!!'
-    });
-};
-
-const updateUsers =(req,res)=>{
-    res.status(500).json({
-        status:'Error',
-        message : 'this function not defined yet!!'
-    });
-};
-
-const deleteUsers = (req,res)=>{
-    res.status(500).json({
-        status:'Error',
-        message : 'this function not defined yet!!'
-    });
-};
+const {updateUsers,getAllUsers,createUsers,deleteUsers,getUsers}=require('./../controllers/userController');
 
 
 const router =express.Router();

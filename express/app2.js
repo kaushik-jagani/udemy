@@ -8,7 +8,7 @@ const app = express();
 //1) middleware section
 
 //middleware handle incoming requests.
-app.use(morgan('dev'));
+app.use(morgan('dev')); 
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -45,6 +45,4 @@ app.use('/api/v1/tours',tourRouter);
 app.use('/api/v1/users',userRouter);
 
 // 4). START SEVER
-app.listen(2000, () => {
-  console.log('app is running');
-});
+module.exports=app;
