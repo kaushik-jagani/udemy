@@ -3,7 +3,7 @@ const {getAllTours,createTour,getTour,updateTour,deleteTour,checkId,checkBody} =
 
 const router =express.Router();
  
-router.param('id',checkId); 
+// router.param('id',checkId); 
  
 router.route('/').get(getAllTours).post(checkBody, createTour);
 
