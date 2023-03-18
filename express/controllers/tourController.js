@@ -4,19 +4,19 @@ const Tour = require('../models/tourModel');
 exports.getAllTours = async (req, res) => {
   try {
     //Build query
+    //1) Filtering
     const queryObj = {...req.query};
     const excludeFeilds =['page','sort','limit','fields'];
 
-    //1st way to write mongoose query
-    // const tours=await Tour.find( 
-    //   {
-    //     duration :5
-    //   }
-    // ); 
-    
+    //2) advance filtering 
+    let queryStr =JSON.stringify(queryObj);
+    queryStr=queryStr.replace(/\b(gte|gt|lte|lt|eq)\b/g,match => `$${match}`);
+
+    //{difficultty :'easy',duration:{gte:'5}};
+    const query =Tour.find(JSON.parse(queryStr));  
+
       //Execute The Query
 
-    const query =Tour.find(queryObj);
     const tours = await query;
 
     //2nd method to write mongoose query
