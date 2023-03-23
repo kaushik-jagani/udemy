@@ -6,7 +6,7 @@ const morgan = require('morgan');
 // const xss = require('xss-clean');
 // const hpp = require('hpp');
 
-// const AppError = require('./utils/appError');
+const AppError = require('./utils/appError');
 // const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoute');
@@ -33,15 +33,16 @@ app.use('/api/v1/users', userRouter);
 //error handling
 
 app.all('*', (req, res, next) => {
-  const err = new Error(`cant find ${req.originalUrl} on this server..`);
-  err.status = 'fail';
-  err.statusCode = 404;
-  next(err);
+  // const err = new Error(`cant find ${req.originalUrl} on this server..`);
+  // err.status = 'fail';
+  // err.statusCode = 404;
+  
+  next(new AppError(`cant find ${req.originalUrl} on this server..`,400));
 });
 
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'Eroor';
+  err.status = err.status || 'Eroor'; 
 
   res.status(err.statusCode).json({
     status: err.status,
@@ -50,3 +51,4 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+ 
