@@ -113,8 +113,8 @@ exports.getTourStats = catchAsync(async (req, res,next) => {
     });
 });
 
-exports.getMonthlyPlan = async (req, res) => {
-  try {
+exports.getMonthlyPlan = catchAsync(async (req, res) => {
+
     const year = req.params.year * 1; // 2021
 
     const plan = await Tour.aggregate([
@@ -158,10 +158,5 @@ exports.getMonthlyPlan = async (req, res) => {
         plan
       }
     });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+
+});
