@@ -1,4 +1,6 @@
 const express = require('express');
+const catchAsync = require('./../utils/catchAsync');
+
 const {
   getAllTours,
   createTour,
@@ -7,7 +9,7 @@ const {
   deleteTour,
   aliasTopTours,
   getTourStats,
-  getMonthlyPlan
+  getMonthlyPlan,
 } = require('../controllers/tourController');
 
 const router = express.Router();
@@ -19,7 +21,6 @@ router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 router.route('/tour-stats').get(getTourStats);
 
 router.route('/month-plan/:year').get(getMonthlyPlan);
-
 
 router.route('/').get(getAllTours).post(createTour);
 

@@ -1,9 +1,11 @@
 const express =require('express')
 
 const {updateUsers,getAllUsers,createUsers,deleteUsers,getUsers}=require('./../controllers/userController');
-
+const authController =require('./../controllers/authController');
 
 const router =express.Router();
+ 
+router.post('/signup',authController.signup);
 
 router.route('/').get(getAllUsers).post(createUsers);
 
