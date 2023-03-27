@@ -47,9 +47,21 @@ exports.login = catchAsync(async(req,res,next) =>{
 
     //3)if everything is fine then send token to client
     const token=signupToken(user._id);
-    
+
     res.status(200).json({
         status:'success',
         token
     });
+});
+
+exports.protect =catchAsync(async(req,res,next)=>{
+    let token;
+    if(req.headers.authorization && req.headers.authorization.startWith('Bearer')){
+        token =req.headers.authorization.split(' ')[1];
+    }
+
+    if(!token){
+        return next(new AppError('you are not logged in! Please log in to get access',401));
+    }
+    next();
 });
