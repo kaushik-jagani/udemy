@@ -1,3 +1,4 @@
+const util =require('util');
 const jwt =require('jsonwebtoken');
 const User =require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -63,5 +64,10 @@ exports.protect =catchAsync(async(req,res,next)=>{
     if(!token){
         return next(new AppError('you are not logged in! Please log in to get access',401));
     }
+
+    //2)verify token
+    const decoded = await util.promisify(jwt.verify(token,process.env.JWT_SECRET));
+
+
     next();
 });
