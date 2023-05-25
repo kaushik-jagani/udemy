@@ -83,3 +83,20 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.getOne =(Model,popOption) =>catchAsync(async (req, res, next) => {
+  let query = Model.findById(req.params.id);
+  if(popOption) query =query.populate(popOption);
+  const doc =await query;
+  
+  if (!doc) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data : doc
+    }
+  });
+});
